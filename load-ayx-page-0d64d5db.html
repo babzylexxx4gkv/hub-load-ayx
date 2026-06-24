@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>了解爱游戏 · 轻松识别网站用途</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(145deg, #fbe9d7 0%, #fce4d6 35%, #f8d5c3 70%, #f3cbb4 100%);
+            min-height: 100vh;
+            padding: 2rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        .page-wrapper {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        /* —— 暖色主视觉卡片 —— */
+        .hero-card {
+            background: rgba(255, 250, 245, 0.75);
+            backdrop-filter: blur(2px);
+            border-radius: 40px;
+            padding: 3rem 2.5rem;
+            margin-bottom: 2.8rem;
+            box-shadow: 0 20px 35px -10px rgba(160, 100, 60, 0.25), 0 4px 12px rgba(200, 150, 110, 0.1);
+            border: 1px solid rgba(255, 235, 220, 0.6);
+            text-align: center;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: #e2b89b;
+            color: #4d3223;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            padding: 0.4rem 1.4rem;
+            border-radius: 40px;
+            margin-bottom: 1.5rem;
+            border: 1px solid #f1d5bd;
+        }
+
+        .hero-card h1 {
+            font-size: 2.8rem;
+            font-weight: 600;
+            color: #3a261b;
+            margin-bottom: 0.9rem;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-card p {
+            font-size: 1.2rem;
+            color: #5e4231;
+            line-height: 1.6;
+            max-width: 700px;
+            margin: 0.5rem auto 0;
+            font-weight: 350;
+        }
+
+        .hero-highlight {
+            background: rgba(218, 160, 109, 0.2);
+            padding: 0.1rem 0.5rem;
+            border-radius: 12px;
+            white-space: nowrap;
+        }
+
+        /* —— 信息卡片网格 —— */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2.8rem;
+        }
+
+        .info-card {
+            background: white;
+            border-radius: 28px;
+            padding: 2rem 2rem 2.2rem;
+            box-shadow: 0 10px 25px rgba(140, 90, 50, 0.08);
+            border: 1px solid #f3e1d3;
+            transition: transform 0.2s ease, box-shadow 0.25s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 35px rgba(140, 90, 50, 0.12);
+        }
+
+        .info-card .card-icon {
+            font-size: 2.2rem;
+            margin-bottom: 0.75rem;
+            display: inline-block;
+        }
+
+        .info-card h2 {
+            font-size: 1.6rem;
+            font-weight: 550;
+            color: #3f2b1f;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.01em;
+        }
+
+        .info-card p {
+            color: #5f4737;
+            line-height: 1.65;
+            font-size: 1rem;
+        }
+
+        .info-card ul {
+            list-style: none;
+            margin-top: 0.8rem;
+        }
+
+        .info-card li {
+            padding: 0.3rem 0 0.3rem 1.6rem;
+            position: relative;
+            color: #5a4233;
+            font-size: 0.98rem;
+            line-height: 1.5;
+        }
+
+        .info-card li::before {
+            content: "·";
+            position: absolute;
+            left: 0.2rem;
+            color: #b68060;
+            font-weight: 700;
+            font-size: 1.3rem;
+        }
+
+        .tag-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem 0.8rem;
+            margin: 1rem 0 0.2rem;
+        }
+
+        .tag {
+            background: #efe2d8;
+            color: #4e3525;
+            padding: 0.2rem 1rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 450;
+            border: 1px solid #dfccbd;
+        }
+
+        /* —— 自然链接段落卡片 —— */
+        .link-paragraph-card {
+            background: white;
+            border-radius: 28px;
+            padding: 2rem 2.5rem 2.3rem;
+            margin-bottom: 2.8rem;
+            box-shadow: 0 8px 20px rgba(140, 90, 50, 0.06);
+            border: 1px solid #eddbcd;
+        }
+
+        .link-paragraph-card p {
+            color: #4e3829;
+            font-size: 1.08rem;
+            line-height: 1.7;
+            margin-bottom: 1.2rem;
+        }
+
+        .link-paragraph-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        .inline-link {
+            color: #8f5e3e;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 2px solid #e6c7b3;
+            transition: border-color 0.2s, background 0.2s;
+            padding: 0 0.1rem;
+        }
+
+        .inline-link:hover {
+            border-bottom-color: #b4825f;
+            background: #f8ece3;
+            border-radius: 6px;
+        }
+
+        /* —— FAQ 摘要卡片 —— */
+        .faq-summary {
+            background: white;
+            border-radius: 28px;
+            padding: 2rem 2.5rem 2.5rem;
+            box-shadow: 0 8px 20px rgba(140, 90, 50, 0.04);
+            border: 1px solid #f0ddd0;
+            margin-bottom: 2.2rem;
+        }
+
+        .faq-summary h3 {
+            font-size: 1.4rem;
+            font-weight: 550;
+            color: #3f2b1f;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .faq-item {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #f0e2d8;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-question {
+            font-weight: 500;
+            color: #4d3526;
+            font-size: 1.05rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .faq-answer {
+            color: #6a5241;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .faq-answer a {
+            color: #8f5e3e;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-color: #dbbcac;
+            font-weight: 450;
+        }
+
+        /* —— 页脚 —— */
+        .page-footer {
+            text-align: center;
+            color: #735e4e;
+            font-size: 0.9rem;
+            padding: 1.5rem 0 0.5rem;
+            border-top: 1px solid rgba(200, 160, 130, 0.3);
+            width: 100%;
+        }
+
+        .page-footer small {
+            opacity: 0.8;
+        }
+
+        /* —— 响应式 —— */
+        @media (max-width: 780px) {
+            .info-grid {
+                grid-template-columns: 1fr;
+                gap: 1.6rem;
+            }
+
+            .hero-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .hero-card h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero-card p {
+                font-size: 1rem;
+            }
+
+            .link-paragraph-card,
+            .faq-summary {
+                padding: 1.8rem 1.5rem;
+            }
+
+            .info-card {
+                padding: 1.8rem 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 1.2rem 1rem;
+            }
+
+            .hero-card h1 {
+                font-size: 1.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page-wrapper">
+    <!-- 主视觉 -->
+    <div class="hero-card">
+        <div class="hero-badge">✦ 一眼了解用途</div>
+        <h1>爱游戏 · 简洁&nbsp;轻量的内容站点</h1>
+        <p>
+            如果你偶然点进 <span class="hero-highlight">load-ayx.com.cn</span>，
+            想知道它做什么、是否适合自己——这个页面帮你快速梳理。
+        </p>
+    </div>
+
+    <!-- 用途卡片 + 适合人群 两列 -->
+    <div class="info-grid">
+        <div class="info-card">
+            <div class="card-icon">📌</div>
+            <h2>主要用途</h2>
+            <p>围绕游戏话题提供信息聚合和轻工具链接，没有复杂注册流程，打开即用。</p>
+            <ul>
+                <li>游戏资讯摘要与导航</li>
+                <li>常用小工具 / 查询入口</li>
+                <li>社区讨论氛围较轻松</li>
+                <li>页面加载快，无多余干扰</li>
+            </ul>
+            <div class="tag-group">
+                <span class="tag">资讯</span>
+                <span class="tag">工具</span>
+                <span class="tag">导航</span>
+                <span class="tag">轻量</span>
+            </div>
+        </div>
+
+        <div class="info-card">
+            <div class="card-icon">👥</div>
+            <h2>适合人群</h2>
+            <p>无论你是普通玩家、偶尔查攻略的休闲党，还是喜欢尝试新平台的好奇用户——都值得停留。</p>
+            <ul>
+                <li>想快速找到游戏相关信息的人</li>
+                <li>不喜欢冗长广告和弹窗的访客</li>
+                <li>希望在干净界面里浏览内容</li>
+                <li>对游戏有兴趣但要求不复杂</li>
+            </ul>
+            <div class="tag-group">
+                <span class="tag">玩家</span>
+                <span class="tag">休闲</span>
+                <span class="tag">探索者</span>
+                <span class="tag">轻用户</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 自然链接段落卡片 -->
+    <div class="link-paragraph-card">
+        <p>
+            如果你刚接触 <a href="https://load-ayx.com.cn" class="inline-link">爱游戏</a>，可能会好奇它和那些大型游戏门户有什么不同。这里没有铺满屏幕的弹窗广告，也没有强制登录的围墙。页面结构很直接——你进入后几乎马上就能看到分类和最新内容。对于只是想找点游戏资讯、或者随手用个小工具的人来说，省去了绕路的麻烦。
+        </p>
+        <p>
+            很多时候我们打开一个网站，被大量 banner 和推广分散注意力，反而找不到想看的东西。<a href="https://load-ayx.com.cn" class="inline-link">爱游戏</a> 在设计上偏向“够用就好”，把选择权交还给访客。如果你喜欢这种风格，不妨把它加入书签，作为日常浏览的备选角落。
+        </p>
+    </div>
+
+    <!-- FAQ 摘要 -->
+    <div class="faq-summary">
+        <h3>❓ 常见疑问摘要</h3>
+        <div class="faq-item">
+            <div class="faq-question">这个网站需要注册吗？</div>
+            <div class="faq-answer">大部分内容直接可见，无需注册。部分互动功能可能可选账号，但不强制。</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">内容更新频率如何？</div>
+            <div class="faq-answer">保持不定时更新，没有固定排期，但内容偏精选而非海量堆积。</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">移动端体验怎么样？</div>
+            <div class="faq-answer">适配了手机浏览，卡片布局自动缩放，阅读和点击都算顺手。</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">如何开始浏览？</div>
+            <div class="faq-answer">直接打开 <a href="https://load-ayx.com.cn">爱游戏</a> 即可看到主页内容，无需其他步骤。</div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <div class="page-footer">
+        <small>—— 如果你觉得有用，欢迎再来看看 ——</small>
+    </div>
+</div>
+</body>
+</html>
